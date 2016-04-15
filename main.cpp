@@ -5,8 +5,21 @@ using namespace std;
 
 void draw_board(int board_sent[][6])
 {
-    for(int i = 0; i < 8; i++)
+    for(int i = 0; i < 7; i ++)
     {
+        cout << "| " << i << " ";
+    }
+
+    cout << "|" << endl;
+
+    for(int o = 0; o < 29; o++)
+    {
+        cout << "-";
+    }
+    cout << endl;
+    for(int i = 0; i < 6; i++)
+    {
+        cout << "| ";
         for(int j = 0; j < 7; j++)
         {
             if(board_sent[i][j] == -1)
@@ -24,6 +37,16 @@ void draw_board(int board_sent[][6])
                     cout << "X";
                 }
             }
+            cout << " |";
+            if(j != 6)
+            {
+                cout << " ";
+            }
+        }
+        cout << endl;
+        for(int o = 0; o < 29; o++)
+        {
+            cout << "-";
         }
         cout << endl;
     }
@@ -42,11 +65,17 @@ int main()
     }
 
     bool play = true;
-
+    bool first_turn = true;
     short int player = 0;
 
     do
     {
+        if(first_turn)
+        {
+            cout << "Welcome to Connect Four game!" << endl << endl;
+            first_turn = false;
+        }
+
         draw_board(board);
 
         player = (player + 1) % 2;
@@ -61,6 +90,8 @@ int main()
         {
             cout << "X";
         }
+
+        cout << " choose a row: ";
 
         if(true)//game done and they dont want to play anymore
         {
