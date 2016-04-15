@@ -7,7 +7,7 @@ void draw_board(int board_sent[][6])
 {
     for(int i = 0; i < 7; i ++)
     {
-        cout << "| " << i << " ";
+        cout << "| " << i + 1 << " ";
     }
 
     cout << "|" << endl;
@@ -92,6 +92,32 @@ int main()
         }
 
         cout << " choose a row: ";
+
+        bool wrong_number = true;
+        int choice;
+        bool another_try = false;
+
+        do
+        {
+            if(another_try)
+            {
+                cout << "Invalid input! Choose a row: ";
+            }
+            cin >> choice;
+            if(choice < 7 && choice > 0)
+            {
+                wrong_number = false;
+            }//here also if for the rows that are full
+            else
+            {
+                another_try = true;
+            }
+
+        }while(wrong_number);
+
+        //here we have choice and we should add it to the board
+
+        //then check whether someone won, it's still in progress or that it's a stalemate
 
         if(true)//game done and they dont want to play anymore
         {
