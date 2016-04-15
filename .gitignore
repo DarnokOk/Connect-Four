@@ -1,0 +1,8 @@
+*.exe
+obj/Debug/main.o
+*.save
+*.depend
+obj/Release/main.o
+Connect-Four.cbp
+*.layout
+Connect-Four.cbp
