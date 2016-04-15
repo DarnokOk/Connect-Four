@@ -17,13 +17,12 @@ void draw_board(int board_sent[][6])
             {
                 if(board_sent[i][j] % 2)
                 {
-                    system("Color 3");
+                    cout << "O";
                 }
                 else
                 {
-                    system("Color 2");
+                    cout << "X";
                 }
-                cout << "O";
             }
         }
         cout << endl;
@@ -44,14 +43,33 @@ int main()
 
     bool play = true;
 
-    system("Color 2");
+    short int player = 0;
 
     do
     {
         draw_board(board);
-        play = false;
-    }while(play);
 
+        player = (player + 1) % 2;
+
+        cout << endl << "Your turn ";
+
+        if(player)
+        {
+            cout << "O";
+        }
+        else
+        {
+            cout << "X";
+        }
+
+        if(true)//game done and they dont want to play anymore
+        {
+            play = false;
+        }
+
+    } while(play);
+
+    cout << endl;
     system("pause");
 
     return 0;

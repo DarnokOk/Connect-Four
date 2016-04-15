@@ -1,2 +1,5 @@
 *.exe
 obj/Debug/main.o
+*.save
+*.depend
+obj/Release/main.o
