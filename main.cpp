@@ -22,13 +22,13 @@ void draw_board(int board_sent[][6])
         cout << "| ";
         for(int j = 0; j < 7; j++)
         {
-            if(board_sent[i][j] == -1)
+            if(board_sent[j][i] == -1)
             {
                 cout << ".";
             }
             else
             {
-                if(board_sent[i][j] % 2)
+                if(board_sent[j][i] % 2)
                 {
                     cout << "O";
                 }
@@ -56,9 +56,9 @@ int main()
 {
     int board[7][6];
 
-    for(int i = 0; i < 8; i++)
+    for(int i = 0; i < 7; i++)
     {
-        for(int j = 0; j < 7; j++)
+        for(int j = 0; j < 6; j++)
         {
             board[i][j] = -1;
         }
@@ -72,15 +72,17 @@ int main()
     {
         if(first_turn)
         {
-            cout << "Welcome to Connect Four game!" << endl << endl;
+            cout << "Welcome to Connect Four game!" << endl;
             first_turn = false;
         }
+
+        cout << endl;
 
         draw_board(board);
 
         player = (player + 1) % 2;
 
-        cout << endl << "Your turn ";
+        cout << endl << "Your turn \"";
 
         if(player)
         {
@@ -91,7 +93,7 @@ int main()
             cout << "X";
         }
 
-        cout << " choose a row: ";
+        cout << "\". Choose a column: ";
 
         bool wrong_number = true;
         int choice;
@@ -101,28 +103,45 @@ int main()
         {
             if(another_try)
             {
-                cout << "Invalid input! Choose a row: ";
+                cout << "Invalid input! Choose a column: ";
             }
             cin >> choice;
-            if(choice < 7 && choice > 0)
-            {
-                wrong_number = false;
-            }//here also if for the rows that are full
-            else
+
+            //check whether it is an int at first
+
+            if(choice > 7 && choice < 1)
             {
                 another_try = true;
+            }
+            else if(board[choice - 1][0] != -1)
+            {
+                another_try = true;
+            }
+            else
+            {
+                wrong_number = false;
             }
 
         }while(wrong_number);
 
+        for(int i = 5; i >= 0; i--)
+        {
+            if(board[choice - 1][i] == -1)
+            {
+                board[choice - 1][i] = player;
+                break;
+            }
+        }
         //here we have choice and we should add it to the board
 
         //then check whether someone won, it's still in progress or that it's a stalemate
 
+        /*
         if(true)//game done and they dont want to play anymore
         {
             play = false;
         }
+        */
 
     } while(play);
 
