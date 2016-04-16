@@ -14,7 +14,14 @@ void draw_board(int board_sent[][6])
 
     for(int o = 0; o < 29; o++)
     {
-        cout << "-";
+        if( !( o  % 4) )
+        {
+            cout << "+";
+        }
+        else
+        {
+            cout << "-";
+        }
     }
     cout << endl;
     for(int i = 0; i < 6; i++)
@@ -46,7 +53,14 @@ void draw_board(int board_sent[][6])
         cout << endl;
         for(int o = 0; o < 29; o++)
         {
-            cout << "-";
+            if( !( o % 4) )
+            {
+                cout << "+";
+            }
+            else
+            {
+                cout << "-";
+            }
         }
         cout << endl;
     }
@@ -105,25 +119,96 @@ int main()
             }
         }
 
-        //check whether someone won
+        bool won = false;
 
-        if(stalemate) game_ended = true;// or if won
+        for(int i = 0; i < 7; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                if(board[i][j] == board[i][j + 1] &&
+                   board[i][j] == board[i][j + 2] &&
+                   board[i][j] == board[i][j + 3] &&
+                   board[i][j] != -1)
+                {
+                    won = true;
+                }
+            }
+        }
 
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 0; j < 6; j++)
+            {
+                if(board[i][j] == board[i + 1][j] &&
+                   board[i][j] == board[i + 2][j] &&
+                   board[i][j] == board[i + 3][j] &&
+                   board[i][j] != -1)
+                {
+                    won = true;
+                }
+            }
+        }
+
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                if(board[i][j] == board[i + 1][j + 1] &&
+                   board[i][j] == board[i + 2][j + 2] &&
+                   board[i][j] == board[i + 3][j + 3] &&
+                   board[i][j] != - 1)
+                {
+                    won = true;
+                }
+            }
+        }
+
+        for(int i = 3; i < 7; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                if(board[i][j] == board[i - 1][j + 1] &&
+                   board[i][j] == board[i - 2][j + 2] &&
+                   board[i][j] == board[i - 3][j + 3] &&
+                   board[i][j] != - 1)
+                {
+                    won = true;
+                }
+            }
+        }
+
+
+        if(stalemate || won) game_ended = true;
         if(game_ended)
         {
             cout << endl << "Here's the final look of the board:" << endl << endl;
 
             draw_board(board);
 
-            cout << endl;
+            cout << endl << endl;
+
+            if(won)
+            {
+                cout << "\"";
+
+                if(player)
+                {
+                    cout << "O";
+                }
+                else
+                {
+                    cout << "X";
+                }
+
+                cout << "\" won!";
+            }
 
             if(stalemate)
             {
-                cout << endl << "Noone won!" << endl;
+                cout << "Noone won!";
             }
-            //else if won
 
-            cout << endl << "Decide:"
+            cout << endl << endl << "Decide:"
                  << endl << "1 - rematch"
                  << endl << "2 - back to menu"
                  << endl << "3 - exit"
