@@ -109,11 +109,7 @@ int main()
 
             //check whether it is an int at first
 
-            if(choice > 7 && choice < 1)
-            {
-                another_try = true;
-            }
-            else if(board[choice - 1][0] != -1)
+            if( (choice > 7 && choice < 1) || (board[choice - 1][0] != -1) )
             {
                 another_try = true;
             }
