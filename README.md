@@ -1,2 +1,2 @@
 # Connect-Four
-A project in C++
+An oldproject in C++
